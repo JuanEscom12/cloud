@@ -1,0 +1,1115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+
+
+	<groupId>com.citi.171086.banamex.cnsv.product-recomendation</groupId>
+
+	<artifactId>mafcs-d-product-recomendation</artifactId>
+
+	<version>0.0.1.${BUILD_NUMBER}</version>
+
+	<packaging>jar</packaging>
+
+
+
+	<name>mafcs-d-product-recomendation-ms</name>
+
+	<description>Product Recomendation MS</description>
+
+
+
+	<parent>
+
+		<groupId>org.springframework.boot</groupId>
+
+		<artifactId>spring-boot-starter-parent</artifactId>
+
+		<version>1.5.8.RELEASE</version>
+
+		<relativePath />
+
+	</parent>
+
+
+
+	<properties>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<java.version>1.8</java.version>
+
+		<spring-shell.version>1.2.0.RELEASE</spring-shell.version>
+
+		<!--nexus.local>swdclinx2.nam.nsroot.net</nexus.local>
+
+		<sonar.host.url>http://gpd-860-4b39.nam.nsroot.net:9000</sonar.host.url-->
+
+		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+
+		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
+
+		<sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
+
+		<sonar.coverage.exclusions>
+
+			**/ObjectFactory.*,
+
+			**/App.*,
+
+			**/AppConfiguration.*,
+
+			**/WSInvoker.*,
+
+			**/RegionUtils.*,
+
+			**/ProductRecomendationProperties.*,
+
+			**/LoggingUtils.*,
+
+			**/BadHeaderRequestException.*,
+
+			**/DataNotFoundException.*,
+
+			**/ErrorResponse.*,
+
+			**/NotFoundException.*,
+
+			**/Response.*,
+
+			**/ServerError.*
+
+		</sonar.coverage.exclusions>
+
+		<sonar.exclusions>
+
+			**/RegionUtils.*
+
+		</sonar.exclusions>
+
+	</properties>
+
+
+
+	<dependencyManagement>
+
+		<dependencies>
+
+			<dependency>
+
+				<groupId>org.springframework.cloud</groupId>
+
+				<artifactId>spring-cloud-dependencies</artifactId>
+
+				<version>Dalston.SR4</version>
+
+				<type>pom</type>
+
+				<scope>import</scope>
+
+			</dependency>
+
+		</dependencies>
+
+	</dependencyManagement>
+
+
+
+	<!--distributionManagement>
+
+		<repository>
+
+			<id>releases</id>
+
+			<name>Hermes Distribution Repository</name>
+
+			<url>http://swdclinx2.nam.nsroot.net:8081/nexus/content/repositories/releases/</url>
+
+		</repository>
+
+		<snapshotRepository>
+
+			<id>nexus</id>
+
+			<url>http://swdclinx2.nam.nsroot.net:8081/nexus/content/repositories/snapshots/</url>
+
+		</snapshotRepository>
+
+	</distributionManagement>
+
+
+
+	<repositories>
+
+		<repository>
+
+			<id>releases</id>
+
+			<name>Hermes Distribution Repository</name>
+
+			<url>http://swdclinx2.nam.nsroot.net:8081/nexus/content/groups/public/</url>
+
+		</repository>
+
+		<repository>
+
+			<id>nexus</id>
+
+			<name>Hermes Distribution Repository</name>
+
+			<url>http://swdclinx2.nam.nsroot.net:8081/nexus/content/groups/public/</url>
+
+		</repository>
+
+		<repository>
+
+			<id>projectlombok.org</id>
+
+			<url>http://projectlombok.org/mavenrepo</url>
+
+		</repository>
+
+	</repositories-->
+
+
+
+	<repositories>
+
+		<repository>
+
+			<id>artifactory</id>
+
+			<name>maven-enterprise</name>
+
+			<url>https://www.artifactrepository.citigroup.net:443/artifactory/maven-enterprise</url>
+
+		</repository>
+
+		<repository>
+
+			<id>central</id>
+
+			<name>maven-remote</name>
+
+			<url>https://www.artifactrepository.citigroup.net:443/artifactory/maven-remote</url>
+
+		</repository>
+
+	</repositories>
+
+	<distributionManagement>
+
+		<repository>
+
+			<id>central</id>
+
+			<name>ctoxudswdapvm4p.nam.nsroot.net-releases</name>
+
+			<url>https://www.artifactrepository.citigroup.net:443/artifactory/maven-gcg-enterprise-local</url>
+
+		</repository>
+
+	</distributionManagement>
+
+
+
+	<dependencies>
+
+		<dependency>
+
+			<groupId>org.springframework.cloud</groupId>
+
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+
+			<exclusions>
+
+				<exclusion>
+
+					<groupId>com.thoughtworks.xstream</groupId>
+
+					<artifactId>xstream</artifactId>
+
+				</exclusion>
+
+			</exclusions>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.projectlombok</groupId>
+
+			<artifactId>lombok</artifactId>
+
+			<version>1.16.18</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>com.thoughtworks.xstream</groupId>
+
+			<artifactId>xstream</artifactId>
+
+			<version>1.4.8</version><!--$NO-MVN-MAN-VER$ -->
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.cloud</groupId>
+
+			<artifactId>spring-cloud-starter-hystrix</artifactId>
+
+			<version>1.1.5.RELEASE</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.boot</groupId>
+
+			<artifactId>spring-boot-starter-web</artifactId>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.boot</groupId>
+
+			<artifactId>spring-boot-starter-test</artifactId>
+
+			<scope>test</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.boot</groupId>
+
+			<artifactId>spring-boot-starter-security</artifactId>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.boot</groupId>
+
+			<artifactId>spring-boot-starter-data-gemfire</artifactId>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.boot</groupId>
+
+			<artifactId>spring-boot-starter-actuator</artifactId>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.cloud</groupId>
+
+			<artifactId>spring-cloud-starter-config</artifactId>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.cloud</groupId>
+
+			<artifactId>spring-cloud-config-client</artifactId>
+
+		</dependency>
+
+		<!-- <dependency> <groupId>org.springframework.cloud</groupId> <artifactId>spring-cloud-config-server</artifactId> 
+
+			</dependency> -->
+
+		<dependency>
+
+			<groupId>junit</groupId>
+
+			<artifactId>junit</artifactId>
+
+			<scope>test</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>com.google.code.gson</groupId>
+
+			<artifactId>gson</artifactId>
+
+			<scope>test</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>com.jayway.restassured</groupId>
+
+			<artifactId>spring-mock-mvc</artifactId>
+
+			<version>2.9.0</version>
+
+			<scope>test</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>io.springfox</groupId>
+
+			<artifactId>springfox-swagger-ui</artifactId>
+
+			<version>2.2.2</version>
+
+			<scope>compile</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>io.springfox</groupId>
+
+			<artifactId>springfox-swagger2</artifactId>
+
+			<version>2.2.2</version>
+
+			<scope>compile</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.data</groupId>
+
+			<artifactId>spring-data-gemfire</artifactId>
+
+			<!-- <version>1.9.4.RELEASE</version> -->
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.springframework.shell</groupId>
+
+			<artifactId>spring-shell</artifactId>
+
+			<version>${spring-shell.version}</version>
+
+			<scope>runtime</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>commons-httpclient</groupId>
+
+			<artifactId>commons-httpclient</artifactId>
+
+			<version>3.1</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.apache.geode</groupId>
+
+			<artifactId>geode-core</artifactId>
+
+			<version>1.3.0</version>
+
+		</dependency>
+
+
+
+		<dependency>
+
+			<groupId>com.citi.171086.mafcs.u.product.recomendation</groupId>
+
+			<artifactId>mafcs-u-product-recommendation</artifactId>
+
+			<version>1.0.0</version>
+
+		</dependency>
+
+
+
+		<dependency>
+
+			<groupId>com.citi.169073.ccp.rel</groupId>
+
+			<artifactId>gemfire-connector</artifactId>
+
+			<version>3.0.15-RELEASE</version>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>org.codehaus.sonar-plugins.java</groupId>
+
+			<artifactId>sonar-jacoco-listeners</artifactId>
+
+			<version>3.2</version>
+
+			<scope>test</scope>
+
+		</dependency>
+
+	</dependencies>
+
+
+
+	<build>
+
+
+
+		<plugins>
+
+			<plugin>
+
+				<groupId>org.springframework.boot</groupId>
+
+				<artifactId>spring-boot-maven-plugin</artifactId>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-surefire-plugin</artifactId>
+
+				<configuration>
+
+					<properties>
+
+						<property>
+
+							<name>listener</name>
+
+							<value>org.sonar.java.jacoco.JUnitListener</value>
+
+						</property>
+
+					</properties>
+
+					<skipTests>false</skipTests>
+
+					<skipExec>false</skipExec>
+
+					<reportsDirectory>${project.basedir}/target/surefire-reports</reportsDirectory>
+
+					<failIfNoTests>false</failIfNoTests>
+
+					<testFailureIgnore>true</testFailureIgnore>
+
+					<test>${jar.unit.test.class}</test>
+
+				</configuration>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-failsafe-plugin</artifactId>
+
+				<version>2.16</version>
+
+				<executions>
+
+					<execution>
+
+						<id>default-integration-test</id>
+
+						<goals>
+
+							<goal>integration-test</goal>
+
+						</goals>
+
+					</execution>
+
+				</executions>
+
+			</plugin>
+
+			<!-- PCF manifest -->
+
+			<plugin>
+
+		        <artifactId>maven-resources-plugin</artifactId>
+
+		        <executions>
+
+		          <execution>
+
+		            <id>copy-manifest</id>
+
+		            <phase>validate</phase>
+
+		            <goals>
+
+		              <goal>copy-resources</goal>
+
+		            </goals>
+
+		           <configuration>
+
+	           		<outputDirectory>${project.build.directory}</outputDirectory>
+
+						<resources>
+
+							<resource>
+
+								<directory>${project.basedir}</directory>
+
+								<includes>
+
+									<include>manifest.yml*</include>
+
+								</includes>
+
+								<filtering>true</filtering>
+
+							</resource>
+
+						</resources>
+
+					</configuration>           
+
+		          </execution>
+
+		        </executions>
+
+      		</plugin>
+
+
+
+      		<plugin>
+
+				<groupId>org.jacoco</groupId>
+
+				<artifactId>jacoco-maven-plugin</artifactId>
+
+				<version>0.7.5.201505241946</version>
+
+				<configuration>
+
+					<excludes>
+
+						<exclude>com/citibanamex/customers/biometrics/logs/models/**/*</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/util/**/*</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/BadHeaderRequestException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/BadRequestException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/DataNotFoundException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/ErrorResponse.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/NotFoundException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/Response.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/ServerError.class</exclude>
+
+					</excludes>
+
+					<destFile>target/jacoco.exec</destFile>
+
+				</configuration>
+
+				<executions>
+
+					<execution>
+
+						<id>default-prepare-agent</id>
+
+						<goals>
+
+							<goal>prepare-agent</goal>
+
+						</goals>
+
+						<configuration>
+
+							<dumpOnExit>true</dumpOnExit>
+
+							<output>file</output>
+
+						</configuration>
+
+					</execution>
+
+					<execution>
+
+						<id>default-report</id>
+
+						<phase>prepare-package</phase>
+
+						<goals>
+
+							<goal>report</goal>
+
+						</goals>
+
+						<configuration>
+
+							<dataFile>target/jacoco.exec</dataFile>
+
+						</configuration>
+
+					</execution>
+
+				</executions>
+
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+
+
+<?comments
+
+
+
+<plugin>
+
+				<groupId>org.jacoco</groupId>
+
+				<artifactId>jacoco-maven-plugin</artifactId>
+
+				<version>0.8.0</version>
+
+				<configuration>
+
+					<excludes>
+
+						<exclude>com/citibanamex/customers/biometrics/logs/models/**/*</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/util/**/*</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/BadHeaderRequestException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/BadRequestException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/DataNotFoundException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/ErrorResponse.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/NotFoundException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/Response.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/ServerError.class</exclude>
+
+					</excludes>
+
+				</configuration>
+
+				<executions>
+
+					<execution>
+
+						<id>default-prepare-agent</id>
+
+						<goals>
+
+							<goal>prepare-agent</goal>
+
+						</goals>
+
+					</execution>
+
+					<execution>
+
+						<id>default-report</id>
+
+
+
+						<goals>
+
+							<goal>report</goal>
+
+						</goals>
+
+					</execution>
+
+					<execution>
+
+						<id>default-check</id>
+
+						<goals>
+
+							<goal>check</goal>
+
+						</goals>
+
+						<configuration>
+
+
+
+							<rules>
+
+								<rule implementation="org.jacoco.maven.RuleConfiguration">
+
+									<element>BUNDLE</element>
+
+									<limits>
+
+										<limit implementation="org.jacoco.report.check.Limit">
+
+											<counter>INSTRUCTION</counter>
+
+											<value>COVEREDRATIO</value>
+
+											<minimum>0.00</minimum>
+
+
+
+										</limit>
+
+									</limits>
+
+								</rule>
+
+							</rules>
+
+						</configuration>
+
+					</execution>
+
+				</executions>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-surefire-plugin</artifactId>
+
+				<version>2.15</version>
+
+				<configuration>
+
+					<!-- Skips unit tests if the value of skip.unit.tests property is true -->
+
+					<skipTests>false</skipTests>
+
+					<reportsDirectory>${project.build.directory}/surefire-report</reportsDirectory>
+
+					<failIfNoTests>true</failIfNoTests>
+
+
+
+					<testFailureIgnore>false</testFailureIgnore>
+
+					<test>${jar.unit.test.class}</test>
+
+				</configuration>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-failsafe-plugin</artifactId>
+
+				<version>2.16</version>
+
+				<executions>
+
+					<execution>
+
+						<id>default-integration-test</id>
+
+						<goals>
+
+							<goal>integration-test</goal>
+
+						</goals>
+
+					</execution>
+
+
+
+				</executions>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-antrun-plugin</artifactId>
+
+				<executions>
+
+					<execution>
+
+						<phase>package</phase>
+
+						<goals>
+
+							<goal>run</goal>
+
+						</goals>
+
+						<configuration>
+
+							<tasks>
+
+								<echo>--- Adding manifest files to build folder ---</echo>
+
+								<copy todir="${project.build.directory}">
+
+									<fileset dir="${project.basedir}">
+
+										<include name="manifest.yml.*" />
+
+									</fileset>
+
+								</copy>
+
+							</tasks>
+
+						</configuration>
+
+					</execution>
+
+				</executions>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-checkstyle-plugin</artifactId>
+
+				<version>3.0.0</version>
+
+				<configuration>
+
+					<configLocation>google_checks.xml</configLocation>
+
+					<encoding>UTF-8</encoding>
+
+					<consoleOutput>true</consoleOutput>
+
+					<failsOnError>false</failsOnError>
+
+					<linkXRef>false</linkXRef>
+
+					<excludes>**/com/citibanamex/api/profiler/product/util/RegionUtils.*</excludes>
+
+				</configuration>
+
+
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.codehaus.mojo</groupId>
+
+				<artifactId>findbugs-maven-plugin</artifactId>
+
+				<version>3.0.5</version>
+
+				<configuration>
+
+					<!-- Enables analysis which takes more memory but finds more bugs. If 
+
+						you run out of memory, changes the value of the effort element to 'low'. -->
+
+					<effort>Max</effort>
+
+					<!-- Reports all bugs (other values are medium and max) -->
+
+					<threshold>Max</threshold>
+
+
+
+				</configuration>
+
+
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.codehaus.mojo</groupId>
+
+				<artifactId>sonar-maven-plugin</artifactId>
+
+				<version>2.7.1</version>
+
+			</plugin>
+
+	<reporting>
+
+		<plugins>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+
+				<version>2.7</version>
+
+				<configuration>
+
+					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+
+				</configuration>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.codehaus.mojo</groupId>
+
+				<artifactId>findbugs-maven-plugin</artifactId>
+
+				<version>3.0.5</version>
+
+				<configuration>
+
+					<!-- Enables analysis which takes more memory but finds more bugs. If 
+
+						you run out of memory, changes the value of the effort element to 'low'. -->
+
+					<effort>Max</effort>
+
+					<!-- Reports all bugs (other values are medium and max) -->
+
+					<threshold>Max</threshold>
+
+				</configuration>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-checkstyle-plugin</artifactId>
+
+				<version>3.0.0</version>
+
+				<configuration>
+
+					<configLocation>google_checks.xml</configLocation>
+
+					<excludes>**/com/citibanamex/api/profiler/product/util/RegionUtils.*</excludes>
+
+				</configuration>
+
+				<reportSets>
+
+					<reportSet>
+
+						<reports>
+
+							<report>checkstyle</report>
+
+						</reports>
+
+					</reportSet>
+
+				</reportSets>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.apache.maven.plugins</groupId>
+
+				<artifactId>maven-pmd-plugin</artifactId>
+
+				<version>3.8</version>
+
+			</plugin>
+
+			<plugin>
+
+				<groupId>org.jacoco</groupId>
+
+				<artifactId>jacoco-maven-plugin</artifactId>
+
+				<version>0.8.0</version>
+
+				<configuration>
+
+					<excludes>
+
+						<exclude>com/citibanamex/customers/biometrics/logs/models/**/*</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/util/**/*</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/BadHeaderRequestException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/BadRequestException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/DataNotFoundException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/ErrorResponse.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/NotFoundException.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/Response.class</exclude>
+
+						<exclude>com/citibanamex/api/profiler/product/exceptions/ServerError.class</exclude>
+
+					</excludes>
+
+				</configuration>
+
+				<reportSets>
+
+					<reportSet>
+
+						<reports>
+
+							<!-- select non-aggregate reports -->
+
+							<report>report</report>
+
+						</reports>
+
+					</reportSet>
+
+				</reportSets>
+
+			</plugin>
+
+		</plugins>
+
+	</reporting>
+
+?>
+
+</project>
