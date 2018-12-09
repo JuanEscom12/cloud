@@ -5,7 +5,7 @@
 
 	<groupId>com.state.machine.test</groupId>
 	<artifactId>demo</artifactId>
-	<version>1.0.0.version</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>demo</name>
