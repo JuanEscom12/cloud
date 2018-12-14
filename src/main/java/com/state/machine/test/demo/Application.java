@@ -19,7 +19,7 @@ class Application extends SpringBootServletInitializer  {
     @Override 
     public void onStartup(final ServletContext servletContext ) throws ServletException {
         super.onStartup(servletContext);
-        System.out.println("*************************************************************************************************");
+        System.out.println("*********************************************************************************************");
         servletContext.addFilter("requestContextFilter", new RequestContextFilter() ).addMappingForUrlPatterns(null, false, "/*");
     }
 }
